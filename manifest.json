@@ -1,5 +1,15 @@
 {
 	"name": "Skribbl.io Image Reference",
 	"version": "1.0",
-	"manisfest_version": 2
+	"manifest_version": 2,
+	"content_scripts": [
+		{
+			"matches": ["*://Skribbl.io/*"],
+			"js": ["content.js"]
+		}
+	],
+	"browser_action": {
+		"default_popup": "popup.html",
+		"default_title": ""
+	}
 }
