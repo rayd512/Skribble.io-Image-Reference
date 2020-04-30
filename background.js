@@ -1,13 +1,10 @@
-// let word = document.getElementById(currentWord)
-
-// alert(word)
-console.log("running")
-
-chrome.browserAction.onClicked.addListener(buttonClicked)
-
-function buttonClicked(tab) {
-    let msg = {
-        txt: "hello"
-    };
-    chrome.tabs.sendMessage(tab.id, msg);
-}
+// chrome.browserAction.onClicked.addListener(function (tab) { //Fired when User Clicks ICON
+//     console.log("Button Pressed")
+//     if (tab.url.indexOf("https://Skribbl.io/") != -1) { // Inspect whether the place where user clicked matches with our list of URL
+//         chrome.tabs.executeScript(tab.id, {
+//             "file": "content.js"
+//         }, function () { // Execute your code
+//             console.log("Script Executed .. "); // Notification on Completion
+//         });
+//     }
+// });
