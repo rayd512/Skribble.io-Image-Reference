@@ -12,7 +12,7 @@
 		"default_popup": "popup.html",
 		"default_title": ""
 	},
-	"permissions": ["tabs", "https://Skribbl.io/*"],
+	"permissions": ["tabs", "*://*/*"],
 	"background": {
 		"scripts": ["background.js"]
 	}

@@ -1,4 +1,5 @@
-
+var data;
+var currentImage;
 chrome.tabs.query({active: true, currentWindow: true}, gotTabs)
 
 function gotTabs(tabs) {
@@ -37,9 +38,42 @@ function getImages(message) {
     console.log("Opened Request")
     // console.log(JSON.parse(this.response))
     request.onload = function() {
-        var data = JSON.parse(this.response)
+        data = JSON.parse(this.response)
+        currentImage = 0;
         document.getElementById("reference").src = data.results[0].urls.regular;
         console.log("Element src set")
     }
     request.send()
 }
+
+function next(prevButton, nextButton) {
+    if (currentImage == 0) {
+        prevButton.disabled = false;
+    }
+    currentImage++;
+    document.getElementById("reference").src = data.results[currentImage].urls.regular;
+}
+
+function prev(prevButton, nextButton) {
+    currentImage--;
+    if (currentImage == 0) {
+        button1.disabled = true
+    }
+    document.getElementById("reference").src = data.results[currentImage].urls.regular;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var prevButton = document.getElementById("button1")
+    var nextButton = document.getElementById("button2")
+
+    nextButton.addEventListener("click", function() {
+        console.log("Next")
+        next(prevButton, nextButton)
+    })
+
+    prevButton.addEventListener("click", function() {
+        console.log("Prev")
+        prev(prevButton, nextButton)
+    })
+})
+
