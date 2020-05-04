@@ -16,7 +16,7 @@ if (divWord != null) {
         });
     }
 } else {
-    chrome.runtime.sendMessage("no_word", function(response){
+    chrome.runtime.sendMessage("No Word", function(response){
         console.log(response)
     });
     console.log("Could not find the current word")

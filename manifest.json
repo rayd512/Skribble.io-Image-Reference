@@ -12,7 +12,7 @@
 		"default_popup": "popup.html",
 		"default_title": ""
 	},
-	"permissions": ["tabs", "*://*/*"],
+	"permissions": ["tabs", "*://*/*", "storage"],
 	"background": {
 		"scripts": ["background.js"]
 	}

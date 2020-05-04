@@ -46,6 +46,19 @@ function getImages(message) {
     request.send()
 }
 
+
+function store(key, value) {
+    chrome.storage.local.set({key: value}, function() {
+        console.log('Value is set to ' + value);
+      });
+}
+
+function get(key, value) {
+    chrome.storage.local.get([key], function(result) {
+        console.log('Value currently is ' + result.key);
+      });
+}
+
 function next(prevButton, nextButton) {
     if (currentImage == 0) {
         prevButton.disabled = false;
