@@ -22,6 +22,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     //     changeWord = word
     // }
     document.getElementById("Skribbl-word").innerHTML = message
+    store("word", message)
     console.log("Getting Images")
     getImages(message)
     console.log("Set Image")
@@ -39,6 +40,7 @@ function getImages(message) {
     // console.log(JSON.parse(this.response))
     request.onload = function() {
         data = JSON.parse(this.response)
+        
         currentImage = 0;
         document.getElementById("reference").src = data.results[0].urls.regular;
         console.log("Element src set")
