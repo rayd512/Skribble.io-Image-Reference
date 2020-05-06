@@ -3,6 +3,7 @@
 ## Description
 Skribble.io-Image-Reference is a chrome extension that allows you to reference an image 
 while drawing an image in Skribbl.io. Simply clicking the icon in the chrome extensions bar will display an image corresponding to the word the user is currently drawing. The user can press next to display a different reference image. **Currently, this will not work unless you provide an unsplash api key in line 37 of popup.js**
+![](Skribble-Image-Reference-Demo.gif)
 
 ## How to use
 1. Provide and api key on line 37 of popup.js
