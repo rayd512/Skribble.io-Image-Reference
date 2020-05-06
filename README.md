@@ -17,3 +17,4 @@ while drawing an image in Skribbl.io. Simply clicking the icon in the chrome ext
 ## To Do List
 - Find a different way to grab image. Current method displays copyright free images which sometimes results in bad reference images
 - Implement storage feature so when the user clicks off to draw, clicking the extension again will display the same image the user was looking at before the extension was closed
+- Implement nicer looking UI
