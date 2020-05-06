@@ -1,5 +1,8 @@
+// Global Variables
 var data;
 var currentImage;
+
+// Find current tab and execute script
 chrome.tabs.query({active: true, currentWindow: true}, gotTabs)
 
 function gotTabs(tabs) {
@@ -11,18 +14,15 @@ function gotTabs(tabs) {
         });
 }
 
+
+// Listen for message from content.js regarding current word to draw
+// content.js will send the word, "No Word", or "Not Your Turn"
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    // Find the current word
     changeWord = document.getElementById("Skribbl-word").innerHTML
     console.log("Message recieved: " + message)
-    // if (message == "guessing") {
-    //     changeWord = "Not your turn"
-    // } else if (message == "no_word") {
-    //     changeWord = "No word found"
-    // } else {
-    //     changeWord = word
-    // }
     document.getElementById("Skribbl-word").innerHTML = message
-    store("word", message)
+    // store("word", message)
     console.log("Getting Images")
     getImages(message)
     console.log("Set Image")
@@ -31,16 +31,18 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     });
 });
 
+// Make a request to unsplash API to get images of the current word
 function getImages(message) {
-    let UNSPLASH_API_BASE = "https://api.unsplash.com/search/photos?client_id=HLccHhMKXhvNVrUpI97pzEpg_jABsIxp_MWGVXv6hmU&query="
+    // storedImage = get("image")
+    let UNSPLASH_API_BASE = "https://api.unsplash.com/search/photos?client_id=<api_key>&query="
     var request = new XMLHttpRequest()
     var REQUEST_URL = UNSPLASH_API_BASE + message
     request.open('GET', REQUEST_URL, true)
     console.log("Opened Request")
-    // console.log(JSON.parse(this.response))
     request.onload = function() {
+        // Parse response
         data = JSON.parse(this.response)
-        
+        // Keep track of current image
         currentImage = 0;
         document.getElementById("reference").src = data.results[0].urls.regular;
         console.log("Element src set")
@@ -48,19 +50,22 @@ function getImages(message) {
     request.send()
 }
 
+// TO DO: implement storage functionality so when user clicks off extension to draw word
+// if user is still drawing the same word, the same image will be displayed
+// function store(key, value) {
+//     chrome.storage.local.set({key: value}, function(data) {
+//         console.log('Value is set to ' + value);
+//       });
+// }
 
-function store(key, value) {
-    chrome.storage.local.set({key: value}, function() {
-        console.log('Value is set to ' + value);
-      });
-}
+// function get(key) {
+//     chrome.storage.local.get([key], function(result) {
+//         console.log('Value currently is ' + result.key);
+//         return result;
+//       });
+// }
 
-function get(key, value) {
-    chrome.storage.local.get([key], function(result) {
-        console.log('Value currently is ' + result.key);
-      });
-}
-
+// Show next image and enable previous button if not at beginning
 function next(prevButton, nextButton) {
     if (currentImage == 0) {
         prevButton.disabled = false;
@@ -69,6 +74,7 @@ function next(prevButton, nextButton) {
     document.getElementById("reference").src = data.results[currentImage].urls.regular;
 }
 
+// Show previous button and diable previous button if at beginning
 function prev(prevButton, nextButton) {
     currentImage--;
     if (currentImage == 0) {
@@ -77,6 +83,7 @@ function prev(prevButton, nextButton) {
     document.getElementById("reference").src = data.results[currentImage].urls.regular;
 }
 
+// Add listener to when buttons in popup are pressed
 document.addEventListener('DOMContentLoaded', function() {
     var prevButton = document.getElementById("button1")
     var nextButton = document.getElementById("button2")

@@ -1,6 +1,7 @@
+// Parse the current word
 var divWord = document.getElementById("currentWord")
-// console.log(location.href)
-// if (location.href.includes("skribble.io"))
+
+// Send appropriate message
 if (divWord != null) {
     let word = divWord.textContent
     if (word.includes("_")) {
